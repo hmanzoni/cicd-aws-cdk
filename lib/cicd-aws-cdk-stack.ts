@@ -19,8 +19,12 @@ export class CicdAwsCdkStack extends cdk.Stack {
         commands: ['npm ci', 'npx cdk synth'],
       }),
     });
+
     const firtsStage = pipeline.addStage(
       new PipelineStage(this, 'PipelineFirstStage', { stageName: 'First' })
+    );
+    const secondStage = pipeline.addStage(
+      new PipelineStage(this, 'PipelineSecondStage', { stageName: 'Second' })
     );
     firtsStage.addPre(
       new CodeBuildStep('unit-test', {
